@@ -20,7 +20,6 @@ let router =  new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: Home,
       children:[
         {
@@ -34,6 +33,10 @@ let router =  new Router({
         {
           path:'films',
           component:Films
+        },
+        {
+          path:'',
+          redirect:'/films'
         }
       ]
     },
