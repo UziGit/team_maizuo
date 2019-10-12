@@ -55,9 +55,28 @@ let router =  new Router({
     },
     {
       path:'/money',
-      component:Money
+      component:Money,
+      meta:{
+        needIsLogin:true
+      }
     }
   ]
 })
 
+//实现登陆拦截
+router.beforeEach((to, from, next) => {
+
+  let userInfo = window.localStorage.getItem('userInfo');
+  
+  if( to.meta.needIsLogin && !userInfo ){
+    next({
+      path:'/login',
+      query:{
+        redirect:to.fullPath
+      }
+    });
+  }else{
+    next()
+  }
+})
 export default router;
